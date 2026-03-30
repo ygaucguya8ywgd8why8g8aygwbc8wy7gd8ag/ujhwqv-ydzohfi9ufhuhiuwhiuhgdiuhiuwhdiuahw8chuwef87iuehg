@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monster 4 Sale Shop</title>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #00ff00;
+      --text-soft: #99ff99;
+      --button-bg: #00ff00;
+      --button-hover: #33ff33;
+      --button-text: #000000;
+      --border: #00aa00;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px 20px 30px;
+    }
+
+    .content {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      margin: 0 0 15px;
+    }
+
+    .subtitle {
+      color: var(--text-soft);
+      font-size: 1.1rem;
+      margin: 0 0 35px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .product-card {
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      background: rgba(0, 255, 0, 0.05);
+      box-shadow: 0 0 15px rgba(0, 255, 0, 0.12);
+    }
+
+    .product-card h2 {
+      font-size: 1.6rem;
+      margin: 0 0 12px;
+    }
+
+    .product-card p {
+      color: var(--text-soft);
+      font-size: 1rem;
+      line-height: 1.5;
+      margin: 0 0 22px;
+    }
+
+    .price {
+      display: block;
+      color: var(--text);
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      padding: 14px 24px;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      background-color: var(--button-hover);
+      transform: translateY(-2px);
+    }
+
+    .checkout-wrap {
+      width: 100%;
+      max-width: 1000px;
+      margin: 30px auto 0;
+      text-align: center;
+      padding-top: 24px;
+    }
+
+    .summary-scroll {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+    }
+
+    .order-summary {
+      width: 100%;
+      min-width: 560px;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      background: rgba(0, 255, 0, 0.05);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .order-summary th,
+    .order-summary td {
+      border: 1px solid rgba(0, 255, 0, 0.25);
+      padding: 14px 10px;
+      text-align: left;
+    }
+
+    .order-summary th {
+      color: var(--text);
+      background: rgba(0, 255, 0, 0.1);
+    }
+
+    .order-summary td {
+      color: var(--text-soft);
+    }
+
+    .order-summary .empty-row td {
+      text-align: center;
+    }
+
+    .checkout-button {
+      width: min(100%, 360px);
+      font-size: 1.15rem;
+      padding: 16px 28px;
+    }
+
+    .status-message {
+      margin-top: 18px;
+      color: var(--text-soft);
+      font-size: 1rem;
+      min-height: 1.5em;
+    }
+
+    .export-note {
+      margin: 0 0 16px;
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 640px) {
+      .page {
+        padding: 24px 14px 24px;
+      }
+
+      .subtitle {
+        margin-bottom: 24px;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card {
+        padding: 20px 16px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .checkout-button {
+        width: 100%;
+      }
+
+      .order-summary th,
+      .order-summary td {
+        padding: 12px 8px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="content">
+      <h1>Monster 4 Sale</h1>
+      <p class="subtitle">Choose your favourite monster and place your order below.</p>
+
+      <section class="products">
+        <article class="product-card">
+          <h2>White Monster</h2>
+          <p>White Monster tastes like a light, crisp citrus soda with a slightly sweet twist.</p>
+          <span class="price">$4</span>
+          <a class="button order-button" href="#" data-product="White Monster">Order Now</a>
+        </article>
+
+        <article class="product-card">
+          <h2>Mango Loco</h2>
+          <p>Mango Loco tastes like a super sweet, tropical mango juice with hints of pineapple and citrus, kind of like a fizzy fruit punch.</p>
+          <span class="price">$4</span>
+          <a class="button order-button" href="#" data-product="Mango Loco">Order Now</a>
+        </article>
+
+        <article class="product-card">
+          <h2>Papillion</h2>
+          <p>Papillon (the orange Monster) tastes like a smooth, lightly fizzy peach-and-nectarine juice blend with a soft, sweet, almost summery finish.</p>
+          <span class="price">$4</span>
+          <a class="button order-button" href="#" data-product="Papillion">Order Now</a>
+        </article>
+      </section>
+      <p class="status-message" id="statusMessage"></p>
+    </main>
+
+    <div class="checkout-wrap">
+      <div class="summary-scroll">
+        <table class="order-summary" id="orderSummary">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Product</th>
+              <th>Amount</th>
+              <th>Total Price</th>
+            </tr>
+          </thead>
+          <tbody id="orderSummaryBody">
+            <tr class="empty-row">
+              <td colspan="4">No items added yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="export-note">Checkout will download your order file and open an email draft with the order details.</p>
+      <a class="button checkout-button" href="#" id="checkoutButton">Checkout</a>
+    </div>
+  </div>
+
+  <script>
+    const orderButtons = document.querySelectorAll(".order-button");
+    const checkoutButton = document.getElementById("checkoutButton");
+    const statusMessage = document.getElementById("statusMessage");
+    const orderSummaryBody = document.getElementById("orderSummaryBody");
+    const orders = [];
+    const shopEmail = "ccork10@eq.edu.au";
+    let customerName = "";
+
+    function createCsvContent() {
+      const header = ["Name", "Product", "Amount", "Total Price"];
+      const rows = orders.map((order) => [
+        order.name,
+        order.product,
+        order.amount,
+        `$${order.total}`
+      ]);
+
+      return [header, ...rows]
+        .map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(","))
+        .join("\r\n");
+    }
+
+    async function saveOrderFile(contents) {
+      const safeName = customerName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "customer";
+      const fileName = `${safeName}-order.csv`;
+
+      if ("showSaveFilePicker" in window) {
+        const handle = await window.showSaveFilePicker({
+          suggestedName: fileName,
+          types: [
+            {
+              description: "Monster 4 Sale order",
+              accept: {
+                "text/csv": [".csv"]
+              }
+            }
+          ]
+        });
+
+        const writable = await handle.createWritable();
+        await writable.write(contents);
+        await writable.close();
+        return fileName;
+      }
+
+      const blob = new Blob([contents], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement("a");
+      downloadLink.href = url;
+      downloadLink.download = fileName;
+      downloadLink.click();
+      URL.revokeObjectURL(url);
+      return fileName;
+    }
+
+    function createEmailBody(grandTotal) {
+      const lines = [
+        `Customer Name: ${customerName}`,
+        "",
+        "Order Details:"
+      ];
+
+      orders.forEach((order) => {
+        lines.push(`- ${order.product}: ${order.amount} x $4 = $${order.total}`);
+      });
+
+      lines.push("");
+      lines.push(`Grand Total: $${grandTotal}`);
+
+      return lines.join("\n");
+    }
+
+    function askForCustomerName() {
+      while (!customerName) {
+        const enteredName = prompt("What is your name");
+
+        if (!enteredName) {
+          statusMessage.textContent = "Please enter your name to start ordering.";
+          continue;
+        }
+
+        customerName = enteredName.trim();
+      }
+
+      statusMessage.textContent = `Welcome, ${customerName}.`;
+    }
+
+    function renderOrderSummary() {
+      if (orders.length === 0) {
+        orderSummaryBody.innerHTML = `
+          <tr class="empty-row">
+            <td colspan="4">No items added yet.</td>
+          </tr>
+        `;
+        return;
+      }
+
+      orderSummaryBody.innerHTML = orders
+        .map((order) => `
+          <tr>
+            <td>${order.name}</td>
+            <td>${order.product}</td>
+            <td>${order.amount}</td>
+            <td>$${order.total}</td>
+          </tr>
+        `)
+        .join("");
+    }
+
+    orderButtons.forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+
+        const productName = button.dataset.product;
+        const productPrice = 4;
+
+        const quantity = prompt(`How many would you like ${customerName}?`);
+
+        if (!quantity) {
+          statusMessage.textContent = "Order cancelled.";
+          return;
+        }
+
+        const amountWanted = Number(quantity);
+
+        if (!Number.isFinite(amountWanted) || amountWanted <= 0) {
+          statusMessage.textContent = "Please enter a valid amount.";
+          return;
+        }
+
+        const totalPrice = amountWanted * productPrice;
+        const shouldContinue = confirm(`The Total price will be $${totalPrice}, would you like to continue?`);
+
+        if (!shouldContinue) {
+          statusMessage.textContent = "Order cancelled.";
+          return;
+        }
+
+        orders.push({
+          name: customerName,
+          product: productName,
+          amount: amountWanted,
+          total: totalPrice
+        });
+
+        renderOrderSummary();
+        statusMessage.textContent = `${customerName} wants ${amountWanted} ${productName}. Total: $${totalPrice}.`;
+      });
+    });
+
+    checkoutButton.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (orders.length === 0) {
+        statusMessage.textContent = "Add at least one item before checking out.";
+        return;
+      }
+
+      const grandTotal = orders.reduce((sum, order) => sum + order.total, 0);
+      const confirmExport = confirm(`The grand total is $${grandTotal}. Download the order file and open the email draft now?`);
+
+      if (!confirmExport) {
+        statusMessage.textContent = "Checkout cancelled.";
+        return;
+      }
+
+      const csvContent = createCsvContent();
+      const emailSubject = encodeURIComponent(`Monster 4 Sale Order - ${customerName}`);
+      const emailBody = encodeURIComponent(createEmailBody(grandTotal));
+      const mailtoLink = `mailto:${shopEmail}?subject=${emailSubject}&body=${emailBody}`;
+
+      saveOrderFile(csvContent)
+        .then((fileName) => {
+          window.location.href = mailtoLink;
+          statusMessage.textContent = `Order saved as ${fileName}. Your email app should open with the order details.`;
+        })
+        .catch(() => {
+          statusMessage.textContent = "There was a problem saving the order file.";
+        });
+    });
+
+    askForCustomerName();
+  </script>
+</body>
+</html>
