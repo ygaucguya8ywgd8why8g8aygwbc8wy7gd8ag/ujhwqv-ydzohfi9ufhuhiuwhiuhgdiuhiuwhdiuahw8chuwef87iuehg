@@ -303,14 +303,6 @@
     const orders = [];
     const shopEmail = "MonsterLover4Life12345";
     let customerName = "";
-
-    function createCsvContent() {
-      const header = ["Name", "Product", "Amount", "Total Price"];
-      const rows = orders.map((order) => [
-        order.name,
-        order.product,
-        order.amount,
-        `$${order.total}`
       ]);
 
       return [header, ...rows]
